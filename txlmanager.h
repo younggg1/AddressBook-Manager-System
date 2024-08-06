@@ -53,7 +53,7 @@ bool loginUser() {
    cout << "输入密码: ";
     cin >> password;
 
-    ifstream inFile("..\\UserData.txt");
+    ifstream inFile("UserData.txt");
     if (inFile.is_open()) {
         string fileUsername, filePassword;
         while (inFile >> fileUsername >> filePassword) {
@@ -80,7 +80,7 @@ void addUser() {
     cout << "输入密码: ";
     cin >> user.password;
 
-    ofstream outFile("..\\UserData.txt", ios::out | ios::app);
+    ofstream outFile("UserData.txt", ios::out | ios::app);
     if (outFile.is_open()) {
         outFile << user.username << " " << user.password << "\n";
         outFile.close();
@@ -94,8 +94,8 @@ void deleteUser() {
         cout <<"输入要删除的用户名:";
         string username;
         cin >> username;
-        ifstream inFile("..\\UserData.txt");
-        ofstream outFile("..\\temp.txt");
+        ifstream inFile("UserData.txt");
+        ofstream outFile("temp.txt");
         bool userDeleted = false;
         if (inFile.is_open() && outFile.is_open()) {
             string fileUsername, filePassword;
@@ -110,8 +110,8 @@ void deleteUser() {
             inFile.close();
             outFile.close();
 
-            remove("..\\UserData.txt"); // 删除原文件
-            rename("..\\temp.txt", "..\\UserData.txt"); // 重命名临时文件
+            remove("UserData.txt"); // 删除原文件
+            rename("temp.txt", "UserData.txt"); // 重命名临时文件
 
             if (userDeleted) {
                 cout << "删除成功\n";
